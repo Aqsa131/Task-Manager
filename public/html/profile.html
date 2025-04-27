@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do List</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #3f0d80, #9b59b6);
+      color: #fff;
+      padding: 20px;
+    }
+
+    .task-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .task-column h5 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .task-item {
+      background-color: #fff;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .task-item span {
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    .task-actions button {
+      margin-left: 5px;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">To-Do List</h1>
+
+    <div class="d-flex mb-3">
+      <input type="text" class="form-control inputField" placeholder="Add a new task">
+      <button id="addItems" class="btn btn-primary ml-2" type="button">Add Task</button>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="task-column">
+          <h5>📝 To Do</h5>
+          <ul id="todoColumn"></ul>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="task-column">
+          <h5>🚧 In Progress</h5>
+          <ul id="inProgressColumn"></ul>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="task-column">
+          <h5>✅ Done</h5>
+          <ul id="doneColumn"></ul>
+
+        </div>
+      </div>
+    </div>
+
+    <button id="deleteAll" class="btn btn-danger w-100 mt-4" type="button">Delete All</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/todo.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login/Signup Toggle Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: darkslategray;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 1000px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .auth-left {
+      flex: 1;
+      background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4') no-repeat center center;
+      background-size: cover;
+      position: relative;
+      min-height: 450px;
+    }
+
+    .auth-left::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(4px);
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .auth-text {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 20px;
+    }
+
+    .auth-text h2 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .auth-right {
+      flex: 1;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(135deg, #e0e0e0, #ffffff);
+      position: relative;
+    }
+
+    .form-box {
+      width: 100%;
+      animation: fade 0.5s ease;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .nav-tabs {
+      border: none;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .nav-tabs .nav-link {
+      border: none;
+      border-radius: 30px;
+      background: #f0f0f0;
+      margin: 0 5px;
+      color: #555;
+      padding: 10px 20px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-tabs .nav-link.active {
+      background: darkslategray;
+      color: #fff;
+    }
+
+    .btn-purple {
+      background-color: darkslategray;
+      border: none;
+      color: #fff;
+      width: 100%;
+      padding: 10px;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+
+    .btn-purple:hover {
+      background-color: darkslategray;
+    }
+
+    a {
+      color: darkslategray;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .auth-container {
+        flex-direction: column;
+      }
+
+      .auth-left {
+        min-height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="auth-container">
+    <div class="auth-left">
+      <div class="auth-text">
+        <h2>Welcome Back!</h2>
+        <p>Connect with your friends today.</p>
+      </div>
+    </div>
+
+    <div class="auth-right">
+      <ul class="nav nav-tabs" id="formTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button"
+            role="tab">Login</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button"
+            role="tab">Signup</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="formTabsContent">
+        <div class="tab-pane fade show active form-box" id="login" role="tabpanel">
+          <h3 class="text-center mb-4">Login</h3>
+          <form>
+            <div class="mb-3">
+              <input id="Email" type="email" class="form-control" placeholder="Email Address">
+            </div>
+            <div class="mb-3">
+              <input id="Password" type="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="mb-3 text-end">
+              <button id="forgotPass" type="button" class="btn btn-link p-0" style="color: darkslategray; font-weight: 500;">
+                Forgot password?
+              </button>
+            </div>
+            <button id="loginn" type="button" class="btn btn-purple">Login</button>
+          </form>
+          <p class="text-center mt-3">Not a member? <a href="#" onclick="switchTab('signup')">Signup now</a></p>
+        </div>
+        <div class="tab-pane fade form-box" id="signup" role="tabpanel">
+          <h3 class="text-center mb-4">Signup</h3>
+          <form>
+            <div class="mb-3">
+              <input id="name" type="text" class="form-control" placeholder="Full Name">
+            </div>
+            <div class="mb-3">
+              <input id="contact" type="text" class="form-control" placeholder="contact info">
+            </div>
+            <div class="mb-3">
+              <input id="email" type="email" class="form-control" placeholder="Email Address">
+            </div>
+            <div class="mb-3">
+              <input id="password" type="password" class="form-control" placeholder="Password">
+            </div>
+            <button id="register" type="button" class="btn btn-purple">Signup</button>
+            <div class="d-grid mb-3">
+              <button id="google" type="button" class="btn mt-3 btn-purple">
+                <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google icon" class="me-2">
+                Continue with Google
+              </button>
+            </div>
+          </form>
+          <p class="text-center mt-3">Already have an account? <a href="#" onclick="switchTab('login')">Login here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function switchTab(tabId) {
+      const triggerEl = document.querySelector(`#${tabId}-tab`);
+      bootstrap.Tab.getInstance(triggerEl)?.show() || new bootstrap.Tab(triggerEl).show();
+    }
+  </script>
+  <script type="module" src="../js/loginSignup.js"></script>
+</body>
+
+</html>
