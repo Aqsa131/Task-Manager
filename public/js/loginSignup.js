@@ -34,7 +34,7 @@ const register = async () => {
             name,
             contact
           });
-           window.location.pathname = "./public/html/home.html"
+          window.location.href = "./public/html/home.html";
           console.log("Document written with ID: ", docRef.id);
     } catch (error) {
         console.error(error);
@@ -52,7 +52,7 @@ const login = async () => {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         console.log("user login successfully", userCredential.user);
         alert("user login successfully")
-        window.location.pathname = "./public/html/home.html"
+        window.location.href = "./public/html/home.html";
     } catch (error) {
         console.error(error);
     }
@@ -71,7 +71,7 @@ const google = () => {
             const token = credential.accessToken;
             const user = result.user;
             if (user) {
-                window.location.pathname = "./public/html/home.html"
+                window.location.href = "./public/html/home.html";
             }
         }).catch((error) => {
             console.error("error", error)
@@ -114,7 +114,7 @@ const logOut = () => {
     console.log("logout");
     signOut(auth).then(() => {
         console.log("logged Out Successfully");
-        window.location.pathname = "./index.html"
+        window.location.href = "./index.html"
 
     }).catch((error) => {
         console.log(user);
