@@ -9,7 +9,7 @@ const auth = getAuth();
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        window.location.pathname = "./public/html/home.html"
+        window.location.href = "./public/html/home.html"
         console.log("user====>", user);
         const uid = user.uid;
     } else {
