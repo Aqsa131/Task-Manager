@@ -9,7 +9,7 @@ const auth = getAuth();
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        window.location.href = "./public/html/home.html"
+        window.location.href = "/Task-Manager/public/html/home.html"
         console.log("user====>", user);
         const uid = user.uid;
     } else {
@@ -34,7 +34,7 @@ const register = async () => {
             name,
             contact
           });
-          window.location.href = "./public/html/home.html";
+          window.location.href = "/Task-Manager/public/html/home.html";
           console.log("Document written with ID: ", docRef.id);
     } catch (error) {
         console.error(error);
@@ -52,7 +52,7 @@ const login = async () => {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         console.log("user login successfully", userCredential.user);
         alert("user login successfully")
-        window.location.href = "./public/html/home.html";
+        window.location.href = "/Task-Manager/public/html/home.html";
     } catch (error) {
         console.error(error);
     }
@@ -71,7 +71,7 @@ const google = () => {
             const token = credential.accessToken;
             const user = result.user;
             if (user) {
-                window.location.href = "./public/html/home.html";
+                window.location.href = "/Task-Manager/public/html/home.html";
             }
         }).catch((error) => {
             console.error("error", error)
