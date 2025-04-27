@@ -18,18 +18,18 @@ onAuthStateChanged(auth, (user) => {
 // Add new to-do
 const add = async () => {
     const input = document.querySelector(".inputField").value;
-    if (!input) return;  // Prevent adding empty todos
+    if (!input) return;
 
     const docRef = await addDoc(collection(db, "todos"), {
         input,
-        status: "pending", // New status field added
+        status: "pending",
         timeStamp: serverTimestamp(),
-        userId: currentUser?.uid  // Store userId
+        userId: currentUser?.uid
     });
     console.log("Document written with ID: ", docRef.id);
 };
 
-// Fetch all to-dos and display
+
 const getAllTodos = async () => {
     const list = document.getElementById("list");
     const q = collection(db, "todos");
@@ -38,7 +38,6 @@ const getAllTodos = async () => {
         list.innerHTML = "";
         querySnapshot.forEach((doc) => {
             const todoData = doc.data();
-            // Only show to-do if the userId matches the logged-in user
             if (todoData.userId === currentUser?.uid) {
                 list.innerHTML += `
                     <li id="todo-${doc.id}" class="todo-item list-group-item">
@@ -58,7 +57,7 @@ const getAllTodos = async () => {
             todosData.push(todoData);
         });
         console.log("Current todos: ", todosData);
-        
+
         // Add event listeners for Edit, Delete, and Status selection after the list is updated
         document.querySelectorAll('.editBtn').forEach(button => {
             button.addEventListener('click', (e) => {
@@ -81,28 +80,21 @@ const getAllTodos = async () => {
                 updateStatus(docId, newStatus);
             });
         });
-
-        // Initialize tooltips
         var tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-            // new bootstrap.Tooltip(tooltipTriggerEl);
         });
     });
 };
 
 getAllTodos();
-
-// Add event listener to add to-do
 document.getElementById("addItems").addEventListener("click", add);
 
-// Allow pressing Enter to add a to-do
 document.querySelector(".inputField")?.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
         add();
     }
 });
 
-// Delete all todos
 const deleteAll = () => {
     let list = document.getElementById("list");
     list.innerHTML = "";
@@ -110,7 +102,6 @@ const deleteAll = () => {
 
 document.getElementById("deleteAll")?.addEventListener("click", deleteAll);
 
-// Edit todo by ID
 const editTodo = async (docId) => {
     const newInput = prompt("Edit your todo:");
     if (!newInput) return;  // If user cancels or leaves empty

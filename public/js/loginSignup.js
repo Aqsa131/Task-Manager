@@ -1,6 +1,7 @@
 import {
     getAuth, createUserWithEmailAndPassword,
     signInWithEmailAndPassword, signOut, onAuthStateChanged,addDoc, collection,
+    signInWithPopup, GoogleAuthProvider ,sendPasswordResetEmail,
     db
 } from "../../fibase.config.js";
 const auth = getAuth();
@@ -8,11 +9,11 @@ const auth = getAuth();
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
+        window.location.pathname = "./public/html/home.html"
         console.log("user====>", user);
         const uid = user.uid;
     } else {
-        // User is signed out
-        // ...
+        alert("Signup to get Access")
     }
 });
 
@@ -33,14 +34,13 @@ const register = async () => {
             name,
             contact
           });
+           window.location.pathname = "./public/html/home.html"
           console.log("Document written with ID: ", docRef.id);
     } catch (error) {
         console.error(error);
     }
 }
-
 document.getElementById("register")?.addEventListener("click", register)
-
 
 // login
 const login = async () => {
@@ -51,20 +51,70 @@ const login = async () => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         console.log("user login successfully", userCredential.user);
-        window.location.pathname = "./index.html"
+        alert("user login successfully")
+        window.location.pathname = "./public/html/home.html"
     } catch (error) {
         console.error(error);
     }
     console.log("clicked");
 }
 document.getElementById("loginn")?.addEventListener("click", login)
+
+//google
+const provider = new GoogleAuthProvider()
+provider.setCustomParameters({ prompt: "select_account" });
+
+const google = () => {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const user = result.user;
+            if (user) {
+                window.location.pathname = "./public/html/home.html"
+            }
+        }).catch((error) => {
+            console.error("error", error)
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.customData.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+        });
+
+}
+document.getElementById("google")?.addEventListener("click", google)
+
+
+// forgotPass
+const forgotPass = () => {
+    const email = document.getElementById("Email").value
+    sendPasswordResetEmail(auth, email)
+    try {
+        {
+            console.log("email sent to the given email");
+            alert("email sent to the given email");
+        }
+    }
+    catch (error) {
+        console.log("error", Error);
+
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+    };
+
+    console.log("clicked");
+
+}
+document.getElementById("forgotPass")?.addEventListener("click", forgotPass)
 // logOut
 
 const logOut = () => {
     console.log("logout");
     signOut(auth).then(() => {
         console.log("logged Out Successfully");
-        window.location.pathname = "./public/html/loginSignup.html"
+        window.location.pathname = "./index.html"
 
     }).catch((error) => {
         console.log(user);
