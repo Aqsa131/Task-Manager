@@ -114,7 +114,7 @@ const logOut = () => {
     console.log("logout");
     signOut(auth).then(() => {
         console.log("logged Out Successfully");
-        window.location.href = "./index.html"
+        window.location.href = "/Task-Manager/index.html"
 
     }).catch((error) => {
         console.log(user);
