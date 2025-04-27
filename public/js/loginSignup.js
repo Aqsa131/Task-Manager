@@ -18,7 +18,6 @@ onAuthStateChanged(auth, (user) => {
         if (window.location.pathname.includes("home.html")) {
             window.location.href = "/index.html";
         }
-        alert("Signup to get Access");
     }
 });
 // siginUp
