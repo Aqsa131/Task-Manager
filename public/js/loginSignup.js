@@ -9,14 +9,18 @@ const auth = getAuth();
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        window.location.href = "/Task-Manager/public/html/home.html"
-        console.log("user====>", user);
-        const uid = user.uid;
+        console.log(user);
+        
+        if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
+            window.location.href = "/public/html/home.html";
+        }
     } else {
-        alert("Signup to get Access")
+        if (window.location.pathname.includes("home.html")) {
+            window.location.href = "/index.html";
+        }
+        alert("Signup to get Access");
     }
 });
-
 // siginUp
 const register = async () => {
     // e.preventdefault()
